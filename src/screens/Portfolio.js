@@ -40,8 +40,7 @@ const Portfolio = () => {
           <Text
             style={{
               color: COLORS.white,
-              ...FONTS.h1,
-              fontSize: 30,
+              ...FONTS.largeTitle,
               marginTop: 60,
             }}>
             Portfolio

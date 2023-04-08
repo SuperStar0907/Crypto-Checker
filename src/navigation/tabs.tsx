@@ -1,13 +1,96 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable react/no-unstable-nested-components */
 import React, {useCallback} from 'react';
+import {View, TouchableOpacity, Text, Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {TabIcon} from '../components';
 import {Home, Portfolio, Market, Profile} from '../screens';
-import {COLORS} from '../constants';
-import {icons} from '../constants';
-import {CustomizedButton} from '../components';
+import {COLORS, icons, FONTS} from '../constants';
+// import {CustomizedButton} from '../components';
 import TradeContext from '../context/TradeContex';
 const Tab = createBottomTabNavigator();
 
+const CustomizedButton = ({children, onPress}) => {
+  return (
+    <View
+      style={{
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <TouchableOpacity
+        style={{
+          width: 70,
+          height: 70,
+          borderRadius: 35,
+          backgroundColor: COLORS.white,
+        }}
+        onPress={onPress}>
+        {children}
+      </TouchableOpacity>
+    </View>
+  );
+};
+const TabIcon = ({focused, name, icon, isTrade, trade}) => {
+  return isTrade ? (
+    <View
+      style={{
+        width: 70,
+        height: 70,
+        borderRadius: 35,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: COLORS.black,
+      }}>
+      <Image
+        source={icon}
+        style={
+          trade
+            ? {
+                width: 15,
+                height: 15,
+                tintColor: COLORS.white,
+              }
+            : {
+                width: 30,
+                height: 30,
+                tintColor: COLORS.white,
+              }
+        }
+      />
+      <Text
+        style={{
+          color: COLORS.white,
+          ...FONTS.h4,
+        }}>
+        {name}
+      </Text>
+    </View>
+  ) : (
+    <View
+      style={{
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <Image
+        source={icon}
+        style={{
+          width: 30,
+          height: 30,
+          tintColor: focused ? COLORS.white : COLORS.secondary,
+        }}
+      />
+      <Text
+        style={{
+          color: focused ? COLORS.white : COLORS.secondary,
+          ...FONTS.h4,
+        }}>
+        {name}
+      </Text>
+    </View>
+  );
+};
 function Tabs(): JSX.Element {
   const {trade, setTrade} = React.useContext(TradeContext);
   const handleTradeButtonPress = useCallback(() => {
@@ -32,7 +115,6 @@ function Tabs(): JSX.Element {
         name="Home"
         component={Home}
         options={{
-          // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) =>
             !trade && (
               <TabIcon
@@ -54,7 +136,6 @@ function Tabs(): JSX.Element {
         name="Portfolio"
         component={Portfolio}
         options={{
-          // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) =>
             !trade && (
               <TabIcon
@@ -76,7 +157,6 @@ function Tabs(): JSX.Element {
         name="Trade"
         component={Home}
         options={{
-          // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) => (
             <TabIcon
               focused={focused}
@@ -86,15 +166,8 @@ function Tabs(): JSX.Element {
               name="Trade"
             />
           ),
-          // eslint-disable-next-line react/no-unstable-nested-components
           tabBarButton: props => (
-            <CustomizedButton
-              {...props}
-              onPress={
-                // React.useContext(TradeContext).changeTrade
-                handleTradeButtonPress
-              }
-            />
+            <CustomizedButton {...props} onPress={handleTradeButtonPress} />
           ),
         }}
       />
@@ -102,7 +175,6 @@ function Tabs(): JSX.Element {
         name="Market"
         component={Market}
         options={{
-          // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) =>
             !trade && (
               <TabIcon
@@ -124,7 +196,6 @@ function Tabs(): JSX.Element {
         name="Profile"
         component={Profile}
         options={{
-          // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({focused}) =>
             !trade && (
               <TabIcon
