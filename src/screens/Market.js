@@ -284,6 +284,7 @@ const Market = () => {
                           height={60}
                           chartConfig={{
                             color: () => priceColor,
+                            lineWidth: 3,
                           }}
                           bezier
                           style={{
