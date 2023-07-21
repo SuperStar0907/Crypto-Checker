@@ -1,4 +1,6 @@
 # Crypto-Checker
+## Description
+Dynamic mobile application developed in React Native, leveraging CoinGecko API to provide real-time market data. The app features Home, Portfolio, Market, Transfer/Withdraw, and Profile screens, enabling users to conveniently track cryptocurrency prices and manage their holdings, all with a seamless and visually engaging experience.
 
 ## Screenshots
 
